@@ -1,6 +1,12 @@
+# Something very important
+std.Build.StandartOptimizeOptions(.{});
+Doesn't pass optimize correctly to the dependencies!
+Use b.option(bool, "optimize", ...) or set it manually.  
+
 # Work in progress!
 # What this repository is
 It's an example on how to work with the zig game engine that i'm making.
+Here is an engine: [link](https://github.com/Freziyt223/HEAT-Game-Engine)
 
 # For now this engine can:
 - Print to console,
@@ -37,4 +43,3 @@ Enabling strip doesn't generate pdb file so it may save you some space.
     - In ReleaseSmall mode it takes:
         - 31 kb for Executable
         - 1272 kb for PDB file
-- At least 2 core cpu because i forgot to check if cpu count is 1 when making multithreading
