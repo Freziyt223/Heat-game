@@ -1,0 +1,12 @@
+.{
+    .name = .Game,
+    .version = "0.0.1",
+    .minimum_zig_version = "0.15.0",
+    .paths = .{""},
+    .fingerprint = 0x83199eb2d7bc0559,
+    .dependencies = .{
+        .engine = .{
+            .path = "../Engine2"
+        }
+    }
+}
