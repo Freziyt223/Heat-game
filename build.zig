@@ -5,7 +5,7 @@ pub fn build(b: *std.Build) void {
     // There is a big issue with b.StandardOptimizeOption(); as it doesn't let
     // you pass optimize correctly to dependencies, so we have to set it manually.
     // If you want to have it as option, check Engine's build.zig for an example of how to do it properly.
-    const optimize = std.builtin.OptimizeMode.ReleaseSmall;
+    const optimize = std.builtin.OptimizeMode.Debug;
     const engine_dep = b.dependency("engine", .{
         .target = target,
         .optimize = optimize,
