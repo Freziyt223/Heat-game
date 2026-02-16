@@ -5,6 +5,7 @@ Use b.option(bool, "optimize", ...) or set it manually.
 
 # Work in progress!
 # What this repository is
+**For now only singlethreading mode works**
 It's an example on how to work with the zig game engine that i'm making.
 Here is an engine: [link](https://github.com/Freziyt223/HEAT-Game-Engine)
 
@@ -12,7 +13,7 @@ Here is an engine: [link](https://github.com/Freziyt223/HEAT-Game-Engine)
 - Print to console,
 - Print colourful text to console(if terminal supports colour),
 - Has proper init, update and deinit functions,
-- Multithreading queue,
+- Multithreading queue,(only without window management with GLFW)
 - Stage multiple update function with specific tick-rates(uses queue),
 
 # This project's requirements

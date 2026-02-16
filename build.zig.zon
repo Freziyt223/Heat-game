@@ -6,8 +6,8 @@
     .fingerprint = 0x83199eb2d7bc0559,
     .dependencies = .{
         .engine = .{
-            .url = "https://github.com/Freziyt223/HEAT-Game-Engine",
-            .hash = "Engine-0.0.1-kBDsb6pRAADSNTPR3DH1e26w3HGx5G7h8nXm4yPk3ZZg"
+            .path = "../Engine2"
+            //.url = "https://github.com/Freziyt223/HEAT-Game-Engine",
         }
     }
 }
