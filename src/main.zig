@@ -17,9 +17,14 @@ pub fn init(Init: Engine.Init) !void {
     vulkan.init(Init.Allocator);
     Windows[0] = try Engine.Renderer.createWindow(600, 600, "Test window 1", null, null, vulkan);
     Windows[1] = try Engine.Renderer.createWindow(600, 600, "Test window 2", null, null, vulkan);
+    if (vulkan.listDevices()) |devices| {
+        for (devices, 0..) |device, i| {
+            try Engine.IO.Console.Print("{d}: {s}, type: {s}\n", .{i, device.name, @tagName(device.type)});
+        }
+    } else try Engine.IO.Console.Print("null devices", .{});
 }
 pub fn deinit() void {
-    vulkan.deinit(&vulkan);
+    vulkan.deinit();
     Engine.IO.Console.Print("Goodbye, world!\n", .{}) catch unreachable; // Unreachable will stop the execution and show where it happened
 }
 
