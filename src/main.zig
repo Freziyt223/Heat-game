@@ -14,7 +14,7 @@ var vulkan = Engine.Renderer.Renderer(.Vulkan);
 pub fn init(Init: Engine.Init) !void {
     try Engine.IO.Console.Print("Hello, {s}\n", .{"world!"});
     try Engine.IO.Console.ColourPrint("Hello, {s}\n", .{"but in red!"}, .{.Hex = 0xFF0000});
-    vulkan.init(Init.Allocator);
+    try vulkan.init(Init.Allocator);
     Windows[0] = try Engine.Renderer.createWindow(600, 600, "Test window 1", null, null, vulkan);
     Windows[1] = try Engine.Renderer.createWindow(600, 600, "Test window 2", null, null, vulkan);
     if (vulkan.listDevices()) |devices| {
@@ -37,32 +37,37 @@ pub const update = [_]type{
     Loop60
 };
 pub const Loop60 = struct {
-    pub fn update() !void {
+    pub fn update() void {
         const Zone = Engine.ztracy.ZoneNC(@src(), "60 TPS", 0xA000FF);
         defer Zone.End();
     }
     pub var tick_rate: ?u64 = 60;
 };
+var opened_windows: u8 = Windows.len;
 pub const RendererLoop = struct {
-    pub fn main() !void {
+    pub fn update() void {
         const Zone = Engine.ztracy.ZoneNC(@src(), "Window update(120 TPS)", 0xA000FF);
         defer Zone.End();
-        var opened_windows: u8 = 0;
+        
         for (0..Windows.len) |i| {
-            if (Windows[i]) |*window| {
-                if (window.shouldClose()) {
-                    window.destroy();
-                    Windows[i] = null;
-                    continue;
-                } else {
-                    window.swapBuffers();
-                    opened_windows += 1;
-                }
+            var window = Windows[i] orelse continue;
 
-                if (window.getKey(.escape) == .press) window.setShouldClose(true);
+            if (window.getKey(.escape) == .press) {
+                window.setShouldClose(true);
             }
+            if (window.shouldClose()) { 
+                window.destroy();
+                Windows[i] = null;
+                opened_windows -= 1;
+                continue; 
+            }
+            
+            window.swapBuffers();
         }
-        if (opened_windows == 0) State.Running = false;
+        if (opened_windows == 0) {
+            State.Running = false;
+            return;
+        }
     }
     pub var tick_rate: ?u64 = 120;
 };
