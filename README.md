@@ -18,8 +18,11 @@ Here is an engine: [link](https://github.com/Freziyt223/HEAT-Game-Engine)
 
 # This project's requirements
 **Remark**
+**(Needs to be updated, now results vary especially for linux)**
+
 Make sure to clean up .zig-cache time to time because it can grow a lot in space.
 Enabling strip doesn't generate pdb file so it may save you some space.
+
 - Zig version 0.15.X
 - 30 kb for source code
 (Tested on windows 11 x64)
